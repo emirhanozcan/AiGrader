@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/aigrader.css') }}" />
+    <meta charset="utf-8" />
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>AI TOEFL Essay Evaluation</h1>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <div id="pageloader">
+        <img src="https://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif" alt="processing..." />
+    </div>
+
+
+
+
+    <form action="submit" id="textform" method="post">
+        <textarea style=" width: 500px; height: 25px;" id="question" name="question">{{question}}</textarea>
+        <textarea style=" width: 500px; height: 250px;" name="text">{{text}}</textarea>
+        <div class="buttonHolder">
+            <input type="submit" value="Submit" onclick="Language();">
+        </div>
+    </form>
+
+    <div class="rect">{{value}}</div>
+    <script>
+
+        var form = document.getElementById('textform');
+        var language1 = '{{ lan_question }}';
+
+        $(document).ready(function () {
+            $("#textform").on("submit", function () {
+                $("#pageloader").fadeIn();
+            });//submit
+        });//document ready
+
+
+        $(function Language() {
+
+            if (language1 != 'en') {
+
+
+                if (form.checkValidity()) {
+                    alert("Please provide a question in English.");
+                }
+
+
+            } else if ('{{lan_text}}' != 'en') {
+
+
+                if (form.checkValidity()) {
+                    alert("Please provide an essay in English.");
+                }
+
+            } else if ('{{word_count}}' <= 100) {
+
+                if (form.checkValidity()) {
+                    alert("Please provide more than 100 words in your essay.");
+                }
+            }
+        });
+
+
+
+    </script>
+
+
+
+</body>
+</html>
